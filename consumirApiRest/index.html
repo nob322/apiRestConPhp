@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumo de API</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <ul id="listaProductos"></ul>
+
+    <script>
+        // Realizar solicitud GET a la API
+        fetch('http://localhost/apiRest/index.php')
+            .then(response => response.json())
+            .then(data => {
+                const lista = document.getElementById('listaProductos');
+                data.forEach(producto => {
+                    const li = document.createElement('li');
+                    li.textContent = `${producto.nombre} - $${producto.precio}`;
+                    lista.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
